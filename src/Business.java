@@ -2,15 +2,15 @@ public class Business
 {
     private String name;
     private int employees;
-    private double employeeWage;
+    private int employeeWage;
     private boolean ownBuilding;
-    private double buildingRent;
+    private int buildingRent;
     private boolean isHiring;
 
-    public Business(String name, int employees, double employeeWage, boolean ownBuilding, double buildingRent, boolean isHiring)
+    public Business(String name, int employeeWage, boolean ownBuilding, int buildingRent, boolean isHiring)
     {
         this.name = name;
-        this.employees = employees;
+        this.employees = 0;
         this.employeeWage = employeeWage;
         this.ownBuilding = ownBuilding;
         this.buildingRent = buildingRent;
@@ -37,12 +37,12 @@ public class Business
         employees = newEmployees;
     }
 
-    public double getEmployeeWage()
+    public int getEmployeeWage()
     {
         return employeeWage;
     }
 
-    public void setEmployeeWage(double newEmployeeWage)
+    public void setEmployeeWage(int newEmployeeWage)
     {
         employeeWage = newEmployeeWage;
     }
@@ -57,7 +57,7 @@ public class Business
         ownBuilding = newOwnBuilding;
     }
 
-    public double getBuildingRent()
+    public int getBuildingRent()
     {
         return buildingRent;
     }
