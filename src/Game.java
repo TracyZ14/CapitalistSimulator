@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 public class Game extends JFrame implements Runnable, ActionListener
 {
     private Screen screen;
+    private InitialPage page;
     private Menu menu;
 
     public Game(String display)
@@ -12,6 +13,8 @@ public class Game extends JFrame implements Runnable, ActionListener
         super(display);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        page = new InitialPage();
+        this.add(page);
         menu = new Menu();
         JMenuBar menuBar = menu.getMenuBar();
         this.setJMenuBar(menuBar);

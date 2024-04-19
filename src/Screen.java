@@ -11,5 +11,6 @@ public class Screen extends JPanel
         screen = new JPanel();
         screen.setLayout(cardLayout = new CardLayout());
         initialPage = new InitialPage();
+        screen.add(initialPage);
     }
 }
