@@ -13,8 +13,8 @@ public class Game extends JFrame implements Runnable, ActionListener
         super(display);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        page = new InitialPage();
-        this.add(page);
+        this.screen = new Screen();
+        this.add(screen);
         menu = new Menu();
         JMenuBar menuBar = menu.getMenuBar();
         this.setJMenuBar(menuBar);
