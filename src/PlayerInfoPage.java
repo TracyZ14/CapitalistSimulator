@@ -5,8 +5,8 @@ public class PlayerInfoPage extends JPanel
 {
     private Player player;
 
-    public PlayerInfoPage(String name, int money)
+    public PlayerInfoPage(Player player)
     {
-        this.player = new Player(name, money);
+        this.player = player;
     }
 }
