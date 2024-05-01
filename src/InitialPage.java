@@ -36,32 +36,4 @@ public class InitialPage extends JPanel
         center.add(beginGame);
         this.add(center, BorderLayout.CENTER);
     }
-
-    public String getUsername()
-    {
-        return username.getText();
-    }
-
-    public int getInitialMoney()
-    {
-        String amount = initialMoney.getText();
-        boolean isNumber = true;
-        if(amount.equals(""))
-        {
-            isNumber = false;
-        }
-        for(int i = 0; (i < amount.length()) && (isNumber); i++)
-        {
-            char digit = amount.charAt(i);
-            if(!Character.isDigit(digit))
-            {
-                isNumber = false;
-            }
-        }
-        if(isNumber)
-        {
-            return Integer.parseInt(amount);
-        }
-        return((int) (Math.random() * 500000));
-    }
 }

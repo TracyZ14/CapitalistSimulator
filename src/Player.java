@@ -1,22 +1,30 @@
 import java.util.ArrayList;
 public class Player
 {
-    private String userName;
+    private String username;
     private int money;
     private int daysPassed;
     private ArrayList<Business> businesses;
 
-    public Player(String userName, int money)
+    public Player(String username)
     {
-        this.userName = userName;
+        this.username = username;
+        this.money = (int) (Math.random() * 500000);
+        this.daysPassed = 0;
+        this.businesses = new ArrayList<Business>();
+    }
+
+    public Player(String username, int money)
+    {
+        this.username = username;
         this.money = money;
         this.daysPassed = 0;
         this.businesses = new ArrayList<Business>();
     }
 
-    public String getUserName()
+    public String getUsername()
     {
-        return userName;
+        return username;
     }
 
     public int getMoney()
