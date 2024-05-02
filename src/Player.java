@@ -45,6 +45,10 @@ public class Player
     public void increaseDaysPassed()
     {
         daysPassed++;
+        for(Business business : businesses)
+        {
+            setMoney(money + business.calculateNetProfit());
+        }
     }
 
     public ArrayList<Business> getBusinesses()

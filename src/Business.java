@@ -2,7 +2,9 @@ public class Business {
     private String name;
     private int employees;
     private int employeeWage;
+    private int startUpCost;
     private boolean ownBuilding;
+    private int buildingCost;
     private int buildingRent;
     private boolean isHiring;
 
@@ -10,7 +12,10 @@ public class Business {
         this.name = name;
         this.employees = 0;
         this.employeeWage = employeeWage;
+        this.startUpCost = 0;
         this.ownBuilding = ownBuilding;
+        this.buildingCost = 0;
+        this.buildingRent = 0;
         this.isHiring = isHiring;
     }
 
@@ -34,6 +39,16 @@ public class Business {
         return employeeWage;
     }
 
+    public int getStartUpCost()
+    {
+        return startUpCost;
+    }
+
+    public void setStartUpCost(int newStartUpCost)
+    {
+        startUpCost = newStartUpCost;
+    }
+
     public void setEmployeeWage(int newEmployeeWage) {
         employeeWage = newEmployeeWage;
     }
@@ -46,8 +61,23 @@ public class Business {
         ownBuilding = newOwnBuilding;
     }
 
+    public int getBuildingCost()
+    {
+        return buildingCost;
+    }
+
+    public void setBuildingCost(int newBuildingCost)
+    {
+        buildingCost = newBuildingCost;
+    }
+
     public int getBuildingRent() {
         return buildingRent;
+    }
+
+    public void setBuildingRent(int newBuildingRent)
+    {
+        buildingRent = newBuildingRent;
     }
 
     public boolean getIsHiring() {
@@ -58,18 +88,14 @@ public class Business {
         isHiring = newIsHiring;
     }
 
-    public int startUpCost()
+    public int calculateNetProfit()
     {
-        return 0;
-    }
-
-    public int buildingCost()
-    {
-        return 0;
-    }
-
-    public int buildingRent()
-    {
-        return 0;
+        int netProfit = 0;
+        if(!ownBuilding)
+        {
+            netProfit -= buildingRent;
+        }
+        netProfit -= (employees * employeeWage);
+        return netProfit;
     }
 }
