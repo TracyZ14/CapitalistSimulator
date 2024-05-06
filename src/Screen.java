@@ -10,5 +10,8 @@ public class Screen extends JPanel
         this.setLayout(new CardLayout());
         this.initialPage = new InitialPage();
         this.add(initialPage);
+        Player player = new Player("Player");
+        this.playerInfoPage = new PlayerInfoPage(player);
+        this.add(playerInfoPage);
     }
 }
