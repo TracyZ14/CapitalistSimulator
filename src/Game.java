@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 public class Game extends JFrame implements Runnable, ActionListener
 {
     private Screen screen;
-    private InitialPage page;
     private Menu menu;
 
     public Game(String display)
