@@ -60,4 +60,14 @@ public class Player
     {
         businesses = newBusinesses;
     }
+
+    public void addBusiness(Business newBusiness)
+    {
+        businesses.add(newBusiness);
+    }
+
+    public void removeBusiness(Business soldBusiness)
+    {
+        businesses.remove(soldBusiness);
+    }
 }
