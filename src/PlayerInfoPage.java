@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.util.ArrayList;
-import java.lang.Class;
 public class PlayerInfoPage extends JPanel
 {
     private Player player;
@@ -21,6 +20,12 @@ public class PlayerInfoPage extends JPanel
         this.setBorder(BorderFactory.createEmptyBorder(100, 200, 100, 200));
         JPanel center = new JPanel();
         center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
+        JLabel playerUsername = new JLabel(player.getUsername(), SwingConstants.LEFT);
+        playerUsername.setFont(new Font("Courier New", Font.BOLD, 30));
+        center.add(playerUsername);
+        JLabel playerMoney = new JLabel(("$" + player.getMoney()), SwingConstants.LEFT);
+        playerMoney.setFont(new Font("Courier New", Font.BOLD, 25));
+        center.add(playerMoney);
         JLabel businessesLabel = new JLabel("BUSINESSES", SwingConstants.LEFT);
         businessesLabel.setFont(new Font("Courier New", Font.BOLD, 30));
         center.add(businessesLabel);
@@ -28,6 +33,7 @@ public class PlayerInfoPage extends JPanel
         ArrayList<Business> businesses = player.getBusinesses();
         JPanel businessInfo = new JPanel();
         businessInfo.setLayout(new GridLayout((businesses.size() + 1), 4));
+        businessInfo.setLayout(new GridLayout((businesses.size() + 1), 4, 10, 20));
         businessInfo.add(new JLabel("NAME OF BUSINESS", SwingConstants.LEFT));
         businessInfo.add(new JLabel("NUMBER OF EMPLOYEES", SwingConstants.LEFT));
         businessInfo.add(new JLabel("WAGE OF EMPLOYEES", SwingConstants.LEFT));
