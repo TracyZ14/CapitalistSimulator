@@ -88,14 +88,25 @@ public class Business {
         isHiring = newIsHiring;
     }
 
-    public int calculateNetProfit()
+    public int calculateDailyExpenses()
     {
-        int netProfit = 0;
+        int expenses = 0;
         if(!ownBuilding)
         {
-            netProfit -= buildingRent;
+            expenses += buildingRent;
         }
-        netProfit -= (employees * employeeWage);
-        return netProfit;
+        expenses += (employees * employeeWage);
+        return expenses;
+    }
+
+    public int calculateDailyRevenue()
+    {
+        int revenue = 0;
+        return revenue;
+    }
+
+    public int calculateDailyNetIncome()
+    {
+        return(calculateDailyRevenue() - calculateDailyExpenses());
     }
 }

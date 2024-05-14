@@ -4,6 +4,7 @@ public class Screen extends JPanel
 {
     private InitialPage initialPage;
     private PlayerInfoPage playerInfoPage;
+    private BusinessesPage businessesPage;
 
     public Screen()
     {
@@ -13,5 +14,7 @@ public class Screen extends JPanel
         Player player = new Player("Player");
         this.playerInfoPage = new PlayerInfoPage(player);
         this.add(playerInfoPage);
+        this.businessesPage = new BusinessesPage(player);
+        this.add(businessesPage);
     }
 }

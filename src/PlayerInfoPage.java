@@ -32,26 +32,6 @@ public class PlayerInfoPage extends JPanel
         center.setFont(new Font("Courier New", Font.PLAIN, 20));
         ArrayList<Business> businesses = player.getBusinesses();
         JPanel businessInfo = new JPanel();
-        businessInfo.setLayout(new GridLayout((businesses.size() + 1), 4));
-        businessInfo.setLayout(new GridLayout((businesses.size() + 1), 4, 10, 20));
-        businessInfo.add(new JLabel("NAME OF BUSINESS", SwingConstants.LEFT));
-        businessInfo.add(new JLabel("NUMBER OF EMPLOYEES", SwingConstants.LEFT));
-        businessInfo.add(new JLabel("WAGE OF EMPLOYEES", SwingConstants.LEFT));
-        businessInfo.add(new JLabel("IS HIRING", SwingConstants.LEFT));
-        for(Business business : businesses)
-        {
-            JLabel businessName = new JLabel(business.getName(), SwingConstants.LEFT);
-            businessInfo.add(businessName);
-            JLabel numberOfEmployees = new JLabel(("" + business.getEmployees()), SwingConstants.LEFT);
-            businessInfo.add(numberOfEmployees);
-            JLabel employeeWage = new JLabel(("$" + business.getEmployeeWage()), SwingConstants.LEFT);
-            businessInfo.add(employeeWage);
-            JLabel hiringStatus = new JLabel(("" + business.getIsHiring()), SwingConstants.LEFT);
-            businessInfo.add(hiringStatus);
-        }
-        JScrollPane businessesInfo = new JScrollPane(businessInfo);
-        businessesInfo.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        center.add(businessesInfo);
         this.add(center, BorderLayout.CENTER);
     }
 }
