@@ -1,4 +1,5 @@
 public class Business {
+    private String businessType;
     private String name;
     private int employees;
     private int employeeWage;
@@ -8,7 +9,13 @@ public class Business {
     private int buildingRent;
     private boolean isHiring;
 
+    public Business()
+    {
+        this.businessType = "BUSINESS";
+    }
+
     public Business(String name, int employeeWage, boolean ownBuilding, boolean isHiring) {
+        this.businessType = "BUSINESS";
         this.name = name;
         this.employees = 0;
         this.employeeWage = employeeWage;
@@ -17,6 +24,16 @@ public class Business {
         this.buildingCost = 0;
         this.buildingRent = 0;
         this.isHiring = isHiring;
+    }
+
+    public String getBusinessType()
+    {
+        return businessType;
+    }
+
+    public void setBusinessType(String newBusinessType)
+    {
+        businessType = newBusinessType;
     }
 
     public String getName() {

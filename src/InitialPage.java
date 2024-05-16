@@ -10,7 +10,6 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 public class InitialPage extends JPanel
 {
-    private JLabel gameName;
     private TextField username;
     private TextField initialMoney;
     private JButton beginGame;
@@ -19,7 +18,7 @@ public class InitialPage extends JPanel
     {
         this.setLayout(new BorderLayout(100, 50));
         this.setBorder(BorderFactory.createEmptyBorder(200, 0, 200, 0));
-        this.gameName = new JLabel("CapitalistSimulator", SwingConstants.CENTER);
+        JLabel gameName = new JLabel("CapitalistSimulator", SwingConstants.CENTER);
         gameName.setFont(new Font("Courier New", Font.BOLD, 100));
         this.add(gameName, BorderLayout.NORTH);
         JPanel center = new JPanel();

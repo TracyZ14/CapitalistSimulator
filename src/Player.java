@@ -47,7 +47,7 @@ public class Player
         daysPassed++;
         for(Business business : businesses)
         {
-            setMoney(money + business.calculateNetProfit());
+            setMoney(money + business.calculateDailyNetIncome());
         }
     }
 
