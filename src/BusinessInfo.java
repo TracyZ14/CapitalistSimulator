@@ -6,13 +6,18 @@ import javax.swing.BoxLayout;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.util.ArrayList;
-public class BusinessInfo extends JPanel
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+public class BusinessInfo extends JPanel implements ActionListener
 {
     private Player player;
     private Business business;
+    private ArrayList<Business> sameBusinessType;
 
     public BusinessInfo(Player player, Business business)
     {
@@ -25,8 +30,13 @@ public class BusinessInfo extends JPanel
         JPanel center = new JPanel();
         center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
         JButton addBusiness = new JButton("BUY NEW " + business.getBusinessType());
+        addBusiness.addActionListener(this);
         center.add(addBusiness);
+        JButton sellBusiness = new JButton("SELL " + business.getBusinessType());
+        sellBusiness.addActionListener(this);
+        center.add(sellBusiness);
         ArrayList<Business> businesses = player.getBusinesses();
+        this.sameBusinessType = new ArrayList<Business>();
         ArrayList<Business> sameBusinessType = new ArrayList<Business>();
         for(Business b : businesses)
         {
@@ -42,17 +52,37 @@ public class BusinessInfo extends JPanel
         sameBusinessInfo.add(new JLabel("DAILY REVENUE", SwingConstants.LEFT));
         sameBusinessInfo.add(new JLabel("DAILY NET INCOME", SwingConstants.LEFT));
         sameBusinessInfo.add(new JLabel("NUMBER OF EMPLOYEES", SwingConstants.LEFT));
+        sameBusinessInfo.add(new JLabel("EMPLOYEE WAGE", SwingConstants.LEFT));
         sameBusinessInfo.add(new JLabel("IS HIRING", SwingConstants.LEFT));
         sameBusinessInfo.add(new JLabel("OWN BUILDING", SwingConstants.LEFT));
         sameBusinessInfo.add(new JLabel("DAILY RENT", SwingConstants.LEFT));
-        sameBusinessInfo.add(new JLabel());
         for(Business b : sameBusinessType)
         {
-            JButton deleteBusiness = new JButton("DELETE");
-            sameBusinessInfo.add(deleteBusiness);
+            sameBusinessInfo.add(new JLabel(("" + b.getName()), SwingConstants.LEFT));
+            sameBusinessInfo.add(new JLabel(("$" + b.calculateDailyExpenses()), SwingConstants.LEFT));
+            sameBusinessInfo.add(new JLabel(("$" + b.calculateDailyRevenue()), SwingConstants.LEFT));
+            sameBusinessInfo.add(new JLabel(("$" + b.calculateDailyNetIncome()), SwingConstants.LEFT));
+            sameBusinessInfo.add(new JLabel(("" + b.getEmployees()), SwingConstants.LEFT));
+            sameBusinessInfo.add(new JLabel(("$" + b.getEmployeeWage()), SwingConstants.LEFT));
+            sameBusinessInfo.add(new JLabel(("" + b.getIsHiring()), SwingConstants.LEFT));
+            sameBusinessInfo.add(new JLabel(("" + b.ownBuilding()), SwingConstants.LEFT));
+            sameBusinessInfo.add(new JLabel(("$" + b.getBuildingRent()), SwingConstants.LEFT));
         }
         JScrollPane sameBusinessesInfo = new JScrollPane(sameBusinessInfo);
         center.add(sameBusinessesInfo);
         this.add(center, BorderLayout.CENTER);
+    }
+
+    public void actionPerformed(ActionEvent e)
+    {
+        String command = e.getActionCommand();
+        if(command.equals("BUY NEW " + business.getBusinessType()))
+        {
+
+        }
+        if(command.equals("SELL " + business.getBusinessType()))
+        {
+            String businessSold = JOptionPane.showInputDialog("Business to sell:");
+        }
     }
 }
