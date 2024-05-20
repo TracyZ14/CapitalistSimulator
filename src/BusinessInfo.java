@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import javax.swing.JCheckBox;
 public class BusinessInfo extends JPanel implements ActionListener
 {
     private Player player;
@@ -37,7 +38,6 @@ public class BusinessInfo extends JPanel implements ActionListener
         center.add(sellBusiness);
         ArrayList<Business> businesses = player.getBusinesses();
         this.sameBusinessType = new ArrayList<Business>();
-        ArrayList<Business> sameBusinessType = new ArrayList<Business>();
         for(Business b : businesses)
         {
             if(b.getBusinessType().equals(business.getBusinessType()))
@@ -82,7 +82,20 @@ public class BusinessInfo extends JPanel implements ActionListener
         }
         if(command.equals("SELL " + business.getBusinessType()))
         {
-            String businessSold = JOptionPane.showInputDialog("Business to sell:");
+            JPanel businesses = new JPanel();
+            businesses.setLayout(new BoxLayout(businesses, BoxLayout.Y_AXIS));
+            ArrayList<JCheckBox> listOfBusinesses = new ArrayList<JCheckBox>();
+            for(int i = 0; i < sameBusinessType.size(); i++)
+            {
+                JCheckBox businessToSell = new JCheckBox(sameBusinessType.get(i).getName());
+                businesses.add(businessToSell);
+                listOfBusinesses.add(businessToSell);
+            }
+            JOptionPane.showConfirmDialog(null, businesses);
+            for(int i = listOfBusinesses.size() - 1; i >= 0; i--)
+            {
+
+            }
         }
     }
 }
