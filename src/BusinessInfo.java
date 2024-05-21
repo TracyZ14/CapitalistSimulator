@@ -19,6 +19,7 @@ public class BusinessInfo extends JPanel implements ActionListener
     private Player player;
     private Business business;
     private ArrayList<Business> sameBusinessType;
+    private JPanel sameBusinessInfo;
 
     public BusinessInfo(Player player, Business business)
     {
@@ -45,7 +46,7 @@ public class BusinessInfo extends JPanel implements ActionListener
                 sameBusinessType.add(b);
             }
         }
-        JPanel sameBusinessInfo = new JPanel();
+        this.sameBusinessInfo = new JPanel();
         sameBusinessInfo.setLayout(new GridLayout((sameBusinessType.size() + 1), 9));
         sameBusinessInfo.add(new JLabel("NAME", SwingConstants.LEFT));
         sameBusinessInfo.add(new JLabel("DAILY EXPENSES", SwingConstants.LEFT));
@@ -82,20 +83,24 @@ public class BusinessInfo extends JPanel implements ActionListener
         }
         if(command.equals("SELL " + business.getBusinessType()))
         {
-            JPanel businesses = new JPanel();
-            businesses.setLayout(new BoxLayout(businesses, BoxLayout.Y_AXIS));
-            ArrayList<JCheckBox> listOfBusinesses = new ArrayList<JCheckBox>();
+            String[] businesses = new String[sameBusinessType.size()];
             for(int i = 0; i < sameBusinessType.size(); i++)
             {
-                JCheckBox businessToSell = new JCheckBox(sameBusinessType.get(i).getName());
-                businesses.add(businessToSell);
-                listOfBusinesses.add(businessToSell);
+                businesses[i] = sameBusinessType.get(i).getName();
             }
-            JOptionPane.showConfirmDialog(null, businesses);
-            for(int i = listOfBusinesses.size() - 1; i >= 0; i--)
+            String businessSold = (String) JOptionPane.showInputDialog(null, "Business to sell:", "SELL BUSINESSES", JOptionPane.QUESTION_MESSAGE, null, businesses, "BUSINESS");
+            for(int i = 0; i < businesses.length; i++)
             {
-
+                if(businessSold.equals(businesses[i]))
+                {
+                    for(int j = 0; j < 9; j++)
+                    {
+                        sameBusinessInfo.remove((i + 1) * 9);
+                    }
+                    player.removeBusiness(sameBusinessType.remove(i));
+                }
             }
         }
+        sameBusinessInfo.repaint();
     }
 }
