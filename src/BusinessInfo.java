@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import javax.swing.JCheckBox;
 public class BusinessInfo extends JPanel implements ActionListener
 {
     private Player player;
     private Business business;
     private ArrayList<Business> sameBusinessType;
-    private JPanel sameBusinessInfo;
+    private JPanel center;
+    private BusinessInfoChart sameBusinessInfo;
 
     public BusinessInfo(Player player, Business business)
     {
@@ -29,7 +29,7 @@ public class BusinessInfo extends JPanel implements ActionListener
         JLabel businessType = new JLabel(business.getBusinessType(), SwingConstants.CENTER);
         businessType.setFont(new Font("Courier New", Font.BOLD, 75));
         this.add(businessType, BorderLayout.NORTH);
-        JPanel center = new JPanel();
+        this.center = new JPanel();
         center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
         JButton addBusiness = new JButton("BUY NEW " + business.getBusinessType());
         addBusiness.addActionListener(this);
@@ -46,29 +46,7 @@ public class BusinessInfo extends JPanel implements ActionListener
                 sameBusinessType.add(b);
             }
         }
-        this.sameBusinessInfo = new JPanel();
-        sameBusinessInfo.setLayout(new GridLayout((sameBusinessType.size() + 1), 9));
-        sameBusinessInfo.add(new JLabel("NAME", SwingConstants.LEFT));
-        sameBusinessInfo.add(new JLabel("DAILY EXPENSES", SwingConstants.LEFT));
-        sameBusinessInfo.add(new JLabel("DAILY REVENUE", SwingConstants.LEFT));
-        sameBusinessInfo.add(new JLabel("DAILY NET INCOME", SwingConstants.LEFT));
-        sameBusinessInfo.add(new JLabel("NUMBER OF EMPLOYEES", SwingConstants.LEFT));
-        sameBusinessInfo.add(new JLabel("EMPLOYEE WAGE", SwingConstants.LEFT));
-        sameBusinessInfo.add(new JLabel("IS HIRING", SwingConstants.LEFT));
-        sameBusinessInfo.add(new JLabel("OWN BUILDING", SwingConstants.LEFT));
-        sameBusinessInfo.add(new JLabel("DAILY RENT", SwingConstants.LEFT));
-        for(Business b : sameBusinessType)
-        {
-            sameBusinessInfo.add(new JLabel(("" + b.getName()), SwingConstants.LEFT));
-            sameBusinessInfo.add(new JLabel(("$" + b.calculateDailyExpenses()), SwingConstants.LEFT));
-            sameBusinessInfo.add(new JLabel(("$" + b.calculateDailyRevenue()), SwingConstants.LEFT));
-            sameBusinessInfo.add(new JLabel(("$" + b.calculateDailyNetIncome()), SwingConstants.LEFT));
-            sameBusinessInfo.add(new JLabel(("" + b.getEmployees()), SwingConstants.LEFT));
-            sameBusinessInfo.add(new JLabel(("$" + b.getEmployeeWage()), SwingConstants.LEFT));
-            sameBusinessInfo.add(new JLabel(("" + b.getIsHiring()), SwingConstants.LEFT));
-            sameBusinessInfo.add(new JLabel(("" + b.ownBuilding()), SwingConstants.LEFT));
-            sameBusinessInfo.add(new JLabel(("$" + b.getBuildingRent()), SwingConstants.LEFT));
-        }
+        this.sameBusinessInfo = new BusinessInfoChart(sameBusinessType);
         JScrollPane sameBusinessesInfo = new JScrollPane(sameBusinessInfo);
         center.add(sameBusinessesInfo);
         this.add(center, BorderLayout.CENTER);
@@ -101,6 +79,8 @@ public class BusinessInfo extends JPanel implements ActionListener
                 }
             }
         }
+        sameBusinessInfo = new BusinessInfoChart(sameBusinessType);
+        sameBusinessInfo.revalidate();
         sameBusinessInfo.repaint();
     }
 }
