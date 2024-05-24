@@ -126,4 +126,14 @@ public class Business {
     {
         return(calculateDailyRevenue() - calculateDailyExpenses());
     }
+
+    public int calculateWorth()
+    {
+        int worth = 0;
+        if(ownBuilding)
+        {
+            worth += buildingCost;
+        }
+        return worth;
+    }
 }

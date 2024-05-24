@@ -71,16 +71,23 @@ public class BusinessInfo extends JPanel implements ActionListener
             {
                 if(businessSold.equals(businesses[i]))
                 {
-                    for(int j = 0; j < 9; j++)
+                    int sellBusiness = JOptionPane.showConfirmDialog(null, ("Are you sure you want to sell " + businessSold + "?"), "SELL BUSINESS", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if(sellBusiness == JOptionPane.YES_OPTION)
                     {
-                        sameBusinessInfo.remove((i + 1) * 9);
+                        for(int j = 0; j < 9; j++)
+                        {
+                            sameBusinessInfo.remove((i + 1) * 9);
+                        }
+                        JOptionPane.showMessageDialog(null, ("You have successfully sold " + businessSold + " for $" + sameBusinessType.get(i).calculateWorth() + "!"), "SELL BUSINESS", JOptionPane.INFORMATION_MESSAGE);
+                        player.removeBusiness(sameBusinessType.remove(i));
                     }
-                    player.removeBusiness(sameBusinessType.remove(i));
                 }
             }
         }
         sameBusinessInfo = new BusinessInfoChart(sameBusinessType);
         sameBusinessInfo.revalidate();
         sameBusinessInfo.repaint();
+        this.revalidate();
+        this.repaint();
     }
 }
