@@ -57,7 +57,38 @@ public class BusinessInfo extends JPanel implements ActionListener
         String command = e.getActionCommand();
         if(command.equals("BUY NEW " + business.getBusinessType()))
         {
-
+            JTextField newBusinessName = new JTextField(20);
+            JTextField newBusinessWage = new JTextField(20);
+            Object[] newBusinessInfo = {("Name of new " + business.getBusinessType().toLowerCase() + ":"), newBusinessName, "Initial employee wage:", newBusinessWage};
+            int buyNewBusiness = JOptionPane.showConfirmDialog(null, newBusinessInfo, ("BUY NEW " + business.getBusinessType()), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(buyNewBusiness == JOptionPane.OK_OPTION)
+            {
+                int buyBuilding = JOptionPane.showConfirmDialog(null, "Do you want to buy the building for your new business?", ("BUY NEW " + business.getBusinessType()), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(buyBuilding != JOptionPane.CANCEL_OPTION)
+                {
+                    int hireEmployees = JOptionPane.showConfirmDialog(null, "Do you want to start hiring employees right now?", ("BUY NEW " + business.getBusinessType()), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    if(hireEmployees != JOptionPane.CANCEL_OPTION)
+                    {
+                        String newName = newBusinessName.getText();
+                        int newWage = Integer.parseInt(newBusinessWage.getText());
+                        boolean boughtBuilding = false;
+                        if(buyBuilding == JOptionPane.YES_OPTION)
+                        {
+                            boughtBuilding = true;
+                        }
+                        boolean hiringEmployees = false;
+                        if(hireEmployees == JOptionPane.YES_OPTION)
+                        {
+                            hiringEmployees = true;
+                        }
+                        Business newBusiness = new Business();
+                        if(business.getBusinessType().equals("BAKERY"))
+                        {
+                            newBusiness = new Bakery(newName, newWage, boughtBuilding, hiringEmployees);
+                        }
+                    }
+                }
+            }
         }
         if(command.equals("SELL " + business.getBusinessType()))
         {
@@ -66,20 +97,28 @@ public class BusinessInfo extends JPanel implements ActionListener
             {
                 businesses[i] = sameBusinessType.get(i).getName();
             }
-            String businessSold = (String) JOptionPane.showInputDialog(null, "Business to sell:", "SELL BUSINESSES", JOptionPane.QUESTION_MESSAGE, null, businesses, "BUSINESS");
-            for(int i = 0; i < businesses.length; i++)
+            String businessSold = (String) JOptionPane.showInputDialog(null, "Business to sell:", ("SELL " + business.getBusinessType()), JOptionPane.QUESTION_MESSAGE, null, businesses, "BUSINESS");
+            if(businessSold != null)
             {
-                if(businessSold.equals(businesses[i]))
+                for(int i = 0; i < businesses.length; i++)
                 {
-                    int sellBusiness = JOptionPane.showConfirmDialog(null, ("Are you sure you want to sell " + businessSold + "?"), "SELL BUSINESS", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                    if(sellBusiness == JOptionPane.YES_OPTION)
+                    if(businessSold.equals(businesses[i]))
                     {
-                        for(int j = 0; j < 9; j++)
+                        int sellBusiness = JOptionPane.showConfirmDialog(null, ("Are you sure you want to sell " + businessSold + "?"), ("SELL " + business.getBusinessType()), JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                        if(sellBusiness == JOptionPane.YES_OPTION)
                         {
-                            sameBusinessInfo.remove((i + 1) * 9);
+                            for(int j = 0; j < 9; j++)
+                            {
+                                sameBusinessInfo.remove((i + 1) * 9);
+                            }
+                            player.changeMoney(sameBusinessType.get(i).calculateWorth());
+                            JOptionPane.showMessageDialog(null, ("You have successfully sold " + businessSold + " for $" + sameBusinessType.get(i).calculateWorth() + "!"), ("SELL " + business.getBusinessType()), JOptionPane.INFORMATION_MESSAGE);
+                            player.removeBusiness(sameBusinessType.remove(i));
                         }
-                        JOptionPane.showMessageDialog(null, ("You have successfully sold " + businessSold + " for $" + sameBusinessType.get(i).calculateWorth() + "!"), "SELL BUSINESS", JOptionPane.INFORMATION_MESSAGE);
-                        player.removeBusiness(sameBusinessType.remove(i));
+                        if(sellBusiness == JOptionPane.NO_OPTION)
+                        {
+                            JOptionPane.showMessageDialog(null, ("You have failed to sell " + businessSold + "."), ("SELL " + business.getBusinessType()), JOptionPane.WARNING_MESSAGE);
+                        }
                     }
                 }
             }

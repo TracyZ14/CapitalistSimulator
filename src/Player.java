@@ -37,6 +37,11 @@ public class Player
         money = newMoney;
     }
 
+    public void changeMoney(int amountOfMoney)
+    {
+        money += amountOfMoney;
+    }
+
     public int getDaysPassed()
     {
         return daysPassed;
