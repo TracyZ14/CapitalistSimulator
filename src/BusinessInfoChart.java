@@ -24,7 +24,7 @@ public class BusinessInfoChart extends JPanel
         this.add(new JLabel("DAILY RENT", SwingConstants.LEFT));
         for(Business b : listOfBusinesses)
         {
-            this.add(new JLabel(("" + b.getName()), SwingConstants.LEFT));
+            this.add(new JLabel((b.getName()), SwingConstants.LEFT));
             this.add(new JLabel(("$" + b.calculateDailyExpenses()), SwingConstants.LEFT));
             this.add(new JLabel(("$" + b.calculateDailyRevenue()), SwingConstants.LEFT));
             this.add(new JLabel(("$" + b.calculateDailyNetIncome()), SwingConstants.LEFT));

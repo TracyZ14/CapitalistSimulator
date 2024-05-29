@@ -69,8 +69,29 @@ public class BusinessInfo extends JPanel implements ActionListener
                     int hireEmployees = JOptionPane.showConfirmDialog(null, "Do you want to start hiring employees right now?", ("BUY NEW " + business.getBusinessType()), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if(hireEmployees != JOptionPane.CANCEL_OPTION)
                     {
-                        String newName = newBusinessName.getText();
-                        int newWage = Integer.parseInt(newBusinessWage.getText());
+                        String newName = business.getBusinessType();
+                        if(!newBusinessName.getText().equals(""))
+                        {
+                            newName = newBusinessName.getText();
+                        }
+                        int newWage = 0;
+                        if(!newBusinessWage.getText().equals(""))
+                        {
+                            String possibleWage = newBusinessWage.getText();
+                            boolean isNumber = true;
+                            for(int i = 0; (i < possibleWage.length()) && (isNumber); i++)
+                            {
+                                char character = possibleWage.charAt(i);
+                                if(!Character.isDigit(character))
+                                {
+                                    isNumber = false;
+                                }
+                            }
+                            if(isNumber)
+                            {
+                                newWage = Integer.parseInt(newBusinessWage.getText());
+                            }
+                        }
                         boolean boughtBuilding = false;
                         if(buyBuilding == JOptionPane.YES_OPTION)
                         {
@@ -85,6 +106,27 @@ public class BusinessInfo extends JPanel implements ActionListener
                         if(business.getBusinessType().equals("BAKERY"))
                         {
                             newBusiness = new Bakery(newName, newWage, boughtBuilding, hiringEmployees);
+                        }
+                        int cost = newBusiness.getStartUpCost();
+                        if(boughtBuilding)
+                        {
+                            cost += newBusiness.getBuildingCost();
+                        }
+                        int buyBusiness = JOptionPane.showConfirmDialog(null, ("Are you sure you want to buy a new " + business.getBusinessType().toLowerCase() + " for $" + cost + "?"), ("BUY NEW " + business.getBusinessType()), JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                        if(buyBusiness == JOptionPane.YES_OPTION)
+                        {
+                            sameBusinessInfo.add(new JLabel(newBusiness.getName(), SwingConstants.LEFT));
+                            sameBusinessInfo.add(new JLabel(("$" + newBusiness.calculateDailyExpenses()), SwingConstants.LEFT));
+                            sameBusinessInfo.add(new JLabel(("$" + newBusiness.calculateDailyRevenue()), SwingConstants.LEFT));
+                            sameBusinessInfo.add(new JLabel(("$" + newBusiness.calculateDailyNetIncome()), SwingConstants.LEFT));
+                            sameBusinessInfo.add(new JLabel(("" + newBusiness.getEmployees()), SwingConstants.LEFT));
+                            sameBusinessInfo.add(new JLabel(("$" + newBusiness.getEmployeeWage()), SwingConstants.LEFT));
+                            sameBusinessInfo.add(new JLabel(("" + newBusiness.getIsHiring()), SwingConstants.LEFT));
+                            sameBusinessInfo.add(new JLabel(("" + newBusiness.ownBuilding()), SwingConstants.LEFT));
+                            sameBusinessInfo.add(new JLabel(("$" + newBusiness.getBuildingRent()), SwingConstants.LEFT));
+                            sameBusinessType.add(newBusiness);
+                            player.addBusiness(newBusiness);
+                            center.remove(sameBusinessInfo);
                         }
                     }
                 }
