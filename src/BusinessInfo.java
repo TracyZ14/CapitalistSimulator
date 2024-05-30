@@ -47,8 +47,7 @@ public class BusinessInfo extends JPanel implements ActionListener
             }
         }
         this.sameBusinessInfo = new BusinessInfoChart(sameBusinessType);
-        JScrollPane sameBusinessesInfo = new JScrollPane(sameBusinessInfo);
-        center.add(sameBusinessesInfo);
+        center.add(new JScrollPane(sameBusinessInfo, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
         this.add(center, BorderLayout.CENTER);
     }
 
@@ -115,18 +114,8 @@ public class BusinessInfo extends JPanel implements ActionListener
                         int buyBusiness = JOptionPane.showConfirmDialog(null, ("Are you sure you want to buy a new " + business.getBusinessType().toLowerCase() + " for $" + cost + "?"), ("BUY NEW " + business.getBusinessType()), JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                         if(buyBusiness == JOptionPane.YES_OPTION)
                         {
-                            sameBusinessInfo.add(new JLabel(newBusiness.getName(), SwingConstants.LEFT));
-                            sameBusinessInfo.add(new JLabel(("$" + newBusiness.calculateDailyExpenses()), SwingConstants.LEFT));
-                            sameBusinessInfo.add(new JLabel(("$" + newBusiness.calculateDailyRevenue()), SwingConstants.LEFT));
-                            sameBusinessInfo.add(new JLabel(("$" + newBusiness.calculateDailyNetIncome()), SwingConstants.LEFT));
-                            sameBusinessInfo.add(new JLabel(("" + newBusiness.getEmployees()), SwingConstants.LEFT));
-                            sameBusinessInfo.add(new JLabel(("$" + newBusiness.getEmployeeWage()), SwingConstants.LEFT));
-                            sameBusinessInfo.add(new JLabel(("" + newBusiness.getIsHiring()), SwingConstants.LEFT));
-                            sameBusinessInfo.add(new JLabel(("" + newBusiness.ownBuilding()), SwingConstants.LEFT));
-                            sameBusinessInfo.add(new JLabel(("$" + newBusiness.getBuildingRent()), SwingConstants.LEFT));
                             sameBusinessType.add(newBusiness);
                             player.addBusiness(newBusiness);
-                            center.remove(sameBusinessInfo);
                         }
                     }
                 }
@@ -149,10 +138,6 @@ public class BusinessInfo extends JPanel implements ActionListener
                         int sellBusiness = JOptionPane.showConfirmDialog(null, ("Are you sure you want to sell " + businessSold + "?"), ("SELL " + business.getBusinessType()), JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                         if(sellBusiness == JOptionPane.YES_OPTION)
                         {
-                            for(int j = 0; j < 9; j++)
-                            {
-                                sameBusinessInfo.remove((i + 1) * 9);
-                            }
                             player.changeMoney(sameBusinessType.get(i).calculateWorth());
                             JOptionPane.showMessageDialog(null, ("You have successfully sold " + businessSold + " for $" + sameBusinessType.get(i).calculateWorth() + "!"), ("SELL " + business.getBusinessType()), JOptionPane.INFORMATION_MESSAGE);
                             player.removeBusiness(sameBusinessType.remove(i));
@@ -166,8 +151,8 @@ public class BusinessInfo extends JPanel implements ActionListener
             }
         }
         sameBusinessInfo = new BusinessInfoChart(sameBusinessType);
-        sameBusinessInfo.revalidate();
-        sameBusinessInfo.repaint();
+        center.remove(2);
+        center.add(new JScrollPane(sameBusinessInfo, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
         this.revalidate();
         this.repaint();
     }
