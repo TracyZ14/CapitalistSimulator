@@ -8,7 +8,10 @@ import java.awt.TextField;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-public class InitialPage extends JPanel
+import javax.swing.JOptionPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+public class InitialPage extends JPanel implements ActionListener
 {
     private TextField username;
     private TextField initialMoney;
@@ -24,15 +27,72 @@ public class InitialPage extends JPanel
         JPanel center = new JPanel();
         center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
         center.setBorder(BorderFactory.createEmptyBorder(0, 500, 0, 500));
-        this.username = new TextField("USERNAME", 20);
+        center.add(new JLabel("USERNAME", SwingConstants.LEFT));
+        this.username = new TextField(20);
         center.add(username);
         center.add(Box.createVerticalStrut(50));
-        this.initialMoney = new TextField("INITIAL MONEY", 20);
+        center.add(new JLabel("INITIAL MONEY", SwingConstants.LEFT));
+        this.initialMoney = new TextField(20);
         center.add(initialMoney);
         center.add(Box.createVerticalStrut(50));
         this.beginGame = new JButton("START");
         beginGame.setFont(new Font("Courier New", Font.BOLD, 20));
+        beginGame.addActionListener(this);
         center.add(beginGame);
         this.add(center, BorderLayout.CENTER);
+    }
+
+    public void actionPerformed(ActionEvent e)
+    {
+        String command = e.getActionCommand();
+        if(command.equals("START"))
+        {
+            boolean startedGame = true;
+            String failureReason = "";
+            if(!username.getText().equals(""))
+            {
+                if(!initialMoney.getText().equals(""))
+                {
+                    String possibleInitialMoney = initialMoney.getText();
+                    for(int i = 0; (i < possibleInitialMoney.length()) && (startedGame); i++)
+                    {
+                        char character = possibleInitialMoney.charAt(i);
+                        if(!Character.isDigit(character))
+                        {
+                            startedGame = false;
+                            failureReason = "The initial amount of money that you set must be a integer number!";
+                        }
+                    }
+                    if(startedGame)
+                    {
+                        String playerUsername = username.getText();
+                        int playerInitialMoney = Integer.parseInt(initialMoney.getText());
+                        Player player = new Player(playerUsername, playerInitialMoney);
+                    }
+                }
+                else
+                {
+                    int startWithoutMoney = JOptionPane.showConfirmDialog(null, "Are you sure you want to begin without setting the initial amount of money you have?", "BEGIN GAME", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if(startWithoutMoney == JOptionPane.YES_OPTION)
+                    {
+                        JOptionPane.showMessageDialog(null, "You will begin the game with a random initial amount of money!");
+                        Player player = new Player(username.getText());
+                    }
+                    if(startWithoutMoney == JOptionPane.NO_OPTION)
+                    {
+                        failureReason = "You need to set the initial amount of money you have!";
+                    }
+                }
+            }
+            else
+            {
+                startedGame = false;
+                failureReason = "Please input a username!";
+            }
+            if(!startedGame)
+            {
+                JOptionPane.showMessageDialog(null, failureReason, "CANNOT BEGIN GAME", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 }
