@@ -68,6 +68,7 @@ public class InitialPage extends JPanel implements ActionListener
                         String playerUsername = username.getText();
                         int playerInitialMoney = Integer.parseInt(initialMoney.getText());
                         Player player = new Player(playerUsername, playerInitialMoney);
+                        new Game("CapitalistSimulator", player);
                     }
                 }
                 else
@@ -77,6 +78,7 @@ public class InitialPage extends JPanel implements ActionListener
                     {
                         JOptionPane.showMessageDialog(null, "You will begin the game with a random initial amount of money!");
                         Player player = new Player(username.getText());
+                        new Game("CapitalistSimulator", player);
                     }
                     if(startWithoutMoney == JOptionPane.NO_OPTION)
                     {

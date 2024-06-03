@@ -17,14 +17,14 @@ public class BusinessesPage extends JPanel
     {
         this.player = player;
         this.setLayout(new BorderLayout(0, 50));
+        JLabel businessesLabel = new JLabel("BUSINESSES", SwingConstants.CENTER);
+        businessesLabel.setFont(new Font("Courier New", Font.BOLD, 75));
+        this.add(businessesLabel, BorderLayout.NORTH);
         JPanel center = new JPanel();
         center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
-        JLabel businessesLabel = new JLabel("BUSINESSES", SwingConstants.LEFT);
-        businessesLabel.setFont(new Font("Courier New", Font.BOLD, 30));
-        center.add(businessesLabel);
         ArrayList<Business> businesses = player.getBusinesses();
         JPanel businessInfo = new JPanel();
-        businessInfo.setFont(new Font("Courier New", Font.BOLD, 25));
+        Font businessInfoFont = new Font("Courier New", Font.PLAIN, 25);
         businessInfo.setLayout(new GridLayout((businesses.size() + 1), 5, 10, 20));
         businessInfo.add(new JLabel("BUSINESS NAME", SwingConstants.LEFT));
         businessInfo.add(new JLabel("DAILY EXPENSES", SwingConstants.LEFT));
