@@ -27,11 +27,15 @@ public class InitialPage extends JPanel implements ActionListener
         JPanel center = new JPanel();
         center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
         center.setBorder(BorderFactory.createEmptyBorder(0, 500, 0, 500));
-        center.add(new JLabel("USERNAME", SwingConstants.LEFT));
+        JLabel usernameLabel = new JLabel("USERNAME", SwingConstants.LEFT);
+        usernameLabel.setFont(new Font("Courier New", Font.BOLD, 25));
+        center.add(usernameLabel);
         this.username = new TextField(20);
         center.add(username);
         center.add(Box.createVerticalStrut(50));
-        center.add(new JLabel("INITIAL MONEY", SwingConstants.LEFT));
+        JLabel initialMoneyLabel = new JLabel("INITIAL MONEY", SwingConstants.LEFT);
+        initialMoneyLabel.setFont(new Font("Courier New", Font.BOLD, 25));
+        center.add(initialMoneyLabel);
         this.initialMoney = new TextField(20);
         center.add(initialMoney);
         center.add(Box.createVerticalStrut(50));

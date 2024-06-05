@@ -12,7 +12,7 @@ public class BusinessInfoChart extends JPanel
     public BusinessInfoChart(ArrayList<Business> listOfBusinesses)
     {
         this.listOfBusinesses = listOfBusinesses;
-        this.setLayout(new GridLayout(0, 9));
+        this.setLayout(new GridLayout(0, 9, 15, 20));
         this.add(new JLabel("NAME", SwingConstants.LEFT));
         this.add(new JLabel("DAILY EXPENSES", SwingConstants.LEFT));
         this.add(new JLabel("DAILY REVENUE", SwingConstants.LEFT));

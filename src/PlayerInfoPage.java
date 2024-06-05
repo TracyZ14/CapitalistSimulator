@@ -19,7 +19,7 @@ public class PlayerInfoPage extends JPanel implements ActionListener
     {
         this.player = player;
         this.setLayout(new BorderLayout(0, 50));
-        this.setBorder(BorderFactory.createEmptyBorder(100, 200, 100, 200));
+        this.setBorder(BorderFactory.createEmptyBorder(75, 200, 75, 200));
         JLabel playerInfo = new JLabel("PLAYER INFO", SwingConstants.CENTER);
         playerInfo.setFont(new Font("Courier New", Font.BOLD, 75));
         this.add(playerInfo, BorderLayout.NORTH);

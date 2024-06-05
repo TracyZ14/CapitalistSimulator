@@ -17,6 +17,7 @@ public class BusinessesPage extends JPanel
     {
         this.player = player;
         this.setLayout(new BorderLayout(0, 50));
+        this.setBorder(BorderFactory.createEmptyBorder(75, 200, 75, 200));
         JLabel businessesLabel = new JLabel("BUSINESSES", SwingConstants.CENTER);
         businessesLabel.setFont(new Font("Courier New", Font.BOLD, 75));
         this.add(businessesLabel, BorderLayout.NORTH);
@@ -24,13 +25,23 @@ public class BusinessesPage extends JPanel
         center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
         ArrayList<Business> businesses = player.getBusinesses();
         JPanel businessInfo = new JPanel();
-        Font businessInfoFont = new Font("Courier New", Font.PLAIN, 25);
         businessInfo.setLayout(new GridLayout((businesses.size() + 1), 5, 10, 20));
-        businessInfo.add(new JLabel("BUSINESS NAME", SwingConstants.LEFT));
-        businessInfo.add(new JLabel("DAILY EXPENSES", SwingConstants.LEFT));
-        businessInfo.add(new JLabel("DAILY REVENUE", SwingConstants.LEFT));
-        businessInfo.add(new JLabel("DAILY NET INCOME", SwingConstants.LEFT));
-        businessInfo.add(new JLabel("DETAILED INFO", SwingConstants.LEFT));
+        Font businessInfoFont = new Font("Courier New", Font.BOLD, 20);
+        JLabel businessNameColumn = new JLabel("BUSINESS NAME", SwingConstants.LEFT);
+        businessNameColumn.setFont(businessInfoFont);
+        businessInfo.add(businessNameColumn);
+        JLabel dailyExpensesColumn = new JLabel("DAILY EXPENSES", SwingConstants.LEFT);
+        dailyExpensesColumn.setFont(businessInfoFont);
+        businessInfo.add(dailyExpensesColumn);
+        JLabel dailyRevenueColumn = new JLabel("DAILY REVENUE", SwingConstants.LEFT);
+        dailyRevenueColumn.setFont(businessInfoFont);
+        businessInfo.add(dailyRevenueColumn);
+        JLabel dailyNetIncome = new JLabel("DAILY NET INCOME", SwingConstants.LEFT);
+        dailyNetIncome.setFont(businessInfoFont);
+        businessInfo.add(dailyNetIncome);
+        JLabel detailedInfo = new JLabel("DETAILED INFO", SwingConstants.LEFT);
+        detailedInfo.setFont(businessInfoFont);
+        businessInfo.add(detailedInfo);
         businessInfo.setFont(new Font("Courier New", Font.PLAIN, 20));
         for(Business business : businesses)
         {
@@ -38,12 +49,12 @@ public class BusinessesPage extends JPanel
             businessInfo.add(new JLabel(("$" + business.calculateDailyExpenses()), SwingConstants.LEFT));
             businessInfo.add(new JLabel(("$" + business.calculateDailyRevenue()), SwingConstants.LEFT));
             businessInfo.add(new JLabel(("$" + business.calculateDailyNetIncome()), SwingConstants.LEFT));
-            JButton detailedInfo = new JButton();
+            JButton findDetailedInfo = new JButton();
             if(business instanceof Bakery)
             {
-                detailedInfo.setText("BAKERY");
+                findDetailedInfo.setText("BAKERY");
             }
-            businessInfo.add(detailedInfo);
+            businessInfo.add(findDetailedInfo);
         }
         JScrollPane businessesInfo = new JScrollPane(businessInfo);
         center.add(businessesInfo);
