@@ -53,6 +53,11 @@ public class Player
         for(Business business : businesses)
         {
             setMoney(money + business.calculateDailyNetIncome());
+            if(business.getIsHiring())
+            {
+                business.setEmployees(business.getEmployees() + 1);
+            }
+            business.randomizeNumberOfCustomers();
         }
     }
 
